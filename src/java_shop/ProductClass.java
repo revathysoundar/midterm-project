@@ -4,9 +4,36 @@ public class ProductClass {
 	
 	public String productName;
 	public String productDescription;
-	public String productCategory;
+	//public String productCategory;
 	public String price;
+	
 	public double grandtotal;
+	
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getProductDescription() {
+		return productDescription;
+	}
+
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+
 	public double subTotal;
 	public String formOfPayment;
 	
@@ -48,6 +75,8 @@ public class ProductClass {
 	{
 		
 	}
+
+	
 	
 	
 	
