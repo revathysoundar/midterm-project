@@ -59,9 +59,7 @@ public class ProductTextClass {
 		try
 		{
 			File file = filePath.toFile();
-			//FileReader reads text files
 			FileReader fileReader = new FileReader(file);
-			//FileReader is usually wrapped up in BufferedReader 
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			String line;
 			
@@ -69,28 +67,25 @@ public class ProductTextClass {
 			{
 				String[] columns = new String[5];
 				columns = line.split(FIELD_SEP);
-				String productName = columns[0];
-				String productDescription = columns[1];
-				String price = columns[2];
+				String productCode = columns[0];
+				String productName = columns[1];
+				String productDescription = columns[2];
+				String price = columns[3];
 				
 				ProductClass p = new ProductClass();
+				p.setProductCode(productCode);
 				p.setProductName(productName);
 				p.setProductDescription(productDescription);
 				p.setPrice(price);
 				products.add(p);
-				//System.out.println(p.getProductName() + FIELD_SEP.toString() + p.getProductDescription()
-									//+ FIELD_SEP.toString() + p.getPrice());
-				//System.out.println(p.getProductDescription());
-				//System.out.println(p.getPrice());
-				
-				
 			}
 			bufferedReader.close();
-			
-			
 		}catch(IOException ex)
 		{
 			throw new RuntimeException("Unable to read the file"+ex.getMessage());
+		}catch(ArrayIndexOutOfBoundsException ex)
+		{
+			System.out.println("The Product File is empty");
 		}
 		return products;
 	}
@@ -105,19 +100,23 @@ public class ProductTextClass {
 		try
 		{
 			File file = filePath.toFile();
-			PrintWriter writer = new PrintWriter(
-								 new BufferedWriter(
-								 new FileWriter(file)),true);
+			FileWriter fstream = new FileWriter(file,true);
+            BufferedWriter fbw = new BufferedWriter(fstream);
+            //fbw.write("append txt...");
+			//PrintWriter writer = new PrintWriter(
+								// new BufferedWriter(
+								// new FileWriter(file)));
 			
 			for(ProductClass prod : product)
 			{
-				writer.print(prod.getProductName() + FIELD_SEP);
-				writer.print(prod.getProductDescription() + FIELD_SEP);
-				writer.println(prod.getPrice() + FIELD_SEP);
+				fbw.write(prod.getProductName() + FIELD_SEP);
+				fbw.write(prod.getProductDescription() + FIELD_SEP);
+				fbw.write(prod.getPrice() + FIELD_SEP);
+				fbw.newLine();
 				
 			}
-				writer.flush();
-				writer.close();
+				//writer.flush();
+				fbw.close();
 			
 			
 		}catch(IOException ex)

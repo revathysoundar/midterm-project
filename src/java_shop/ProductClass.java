@@ -1,22 +1,32 @@
 package java_shop;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductClass {
 	
+	public String productCode;
 	public String productName;
 	public String productDescription;
-	//public String productCategory;
 	public String price;
 	
-	public double grandtotal;
-	
-	public String getProductName() {
-		return productName;
+
+	public String getProductCode() {
+		return productCode;
+	}
+
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
 	}
 
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-
+	
+	public String getProductName() {
+		return productName;
+	}
+	
 	public String getProductDescription() {
 		return productDescription;
 	}
@@ -26,6 +36,7 @@ public class ProductClass {
 	}
 
 	public String getPrice() {
+		
 		return price;
 	}
 
@@ -33,52 +44,26 @@ public class ProductClass {
 		this.price = price;
 	}
 
-
-	public double subTotal;
-	public String formOfPayment;
-	
-	
-	/**
-	 * Calculate SubTotal, GrandTotal, SalesTax
-	 */
-	public void calculateTotal()
+	public  void displayAllProducts()
 	{
-		
+		ProductTextClass prd = new ProductTextClass();
+		List<ProductClass> productList = new ArrayList<>();
+		productList = prd.readFromFile();
+		if(productList == null){
+			System.out.println("\n Unable to get products from file \n");
+		}else
+		{
+			for(ProductClass p : productList)
+			{
+				p.getProductCode();
+				p.getProductName();
+				p.getProductDescription();
+				p.getPrice();
+				System.out.println(p.getProductName() + "\t\t" + p.getProductDescription()
+				+ "\t\t" + p.getPrice());
+			}
+			
+			
+		}
 	}
-	
-	/**
-	 * 
-	 * Format to 2 decimal places
-	 * @param total
-	 * @return
-	 */
-	public String formatTotal(double total)
-	{
-		return null;
-	}
-	
-	
-	/**
-	 * Mode of payment, to pay the receipt
-	 * @param formOfPayment
-	 */
-	public void paymentType(String formOfPayment)
-	{
-		
-	}
-	
-	
-	/**
-	 * Display the receipt to the User
-	 */
-	public void displayReceipt()
-	{
-		
-	}
-
-	
-	
-	
-	
-
 }

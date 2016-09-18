@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import lab15.CountriesTextFile;
+
 
 public class ProductApp {
 
@@ -13,67 +13,85 @@ public class ProductApp {
 		
 		Scanner sc = new Scanner(System.in);
 		int menuChoice;
+		double qty, gTotal,sum=0;
+		String total,selectMenu, price,ch = "y";
+		List<Order> orderList = new ArrayList<>();
+		ProductClass p = new ProductClass();
+		Order o = new Order();
 		
 		System.out.println("Welcome to Java Shop!");
-		String addProduct;
-		ProductClass product = new ProductClass();
-		List<ProductClass> productList = new ArrayList<>();
-		ProductTextClass ptf = new ProductTextClass();
-		String ch = "y";
+		System.out.println("*********************");
+		System.out.println();
 		while(ch.equalsIgnoreCase("y"))
 		{
 			
-			System.out.println("1 - See the list of Products");
-			System.out.println("2 - Add a Product");
-			System.out.println("3 - Exit");
-			System.out.println("Enter menu number: ");
+			p.displayAllProducts();
+			System.out.println();
+			System.out.println("Order by");
+			System.out.println("1.Number");
+			System.out.println("2. Name");
+			System.out.println("Enter Option ");
 			menuChoice = sc.nextInt();
+			System.out.println("Enter your Order here");
+			selectMenu = sc.next();
+			System.out.println("Quantity:");
+			qty = sc.nextDouble();
+			o.setQuantity(qty);
 		switch(menuChoice)
 		{
-			case 1:	displayAllProducts();
+			case 1:	 price = o.searchOrderByNumber(selectMenu);
+					 selectMenu = o.searchForProduct(selectMenu);
+					 total = o.calculateTotal(price);
+					 gTotal = Double.parseDouble(total.substring(1));
+					 sum += gTotal;
+					 orderList.add(new Order(selectMenu, price, qty, gTotal));
+					 break;
+					 
+			case 2: price = o.searchOrderByName(selectMenu);
+					total = o.calculateTotal(price);
+					gTotal = Double.parseDouble(total.substring(1));
+					sum += gTotal;
+					orderList.add(new Order(selectMenu, price, qty, gTotal));
 					break;
-			case 2: System.out.println("Entry Product");				
-					product.setProductName("Tea");
-					product.setProductDescription("Masala Chai");
-					product.setPrice("2.50");
-					productList.add(product);
-					ptf.writeToFile(productList);
-					System.out.println("This Product has been saved");
-					break;
-			case 3: ch = "n";
-					sc.close();
-					break;
+					
+			
 		}
+		System.out.println("Anything else....(Y/N)");
+		ch = sc.next();
 		
-		
+			
 		}
+		System.out.println("Enter the Mode of Payment Option...");
+		System.out.println("1. Cash");
+		System.out.println("2. Credit");
+		System.out.println("3. Cheque");
+		int payType = sc.nextInt();
+		o.modeOfPayment(payType);
+		printReceipt(orderList,o.formatTotal(sum));
+		sc.close();
 	}
 		
-		public static void displayAllProducts()
+		
+		
+		public static void printReceipt(List<Order> orderList,String sum)
 		{
 			
-			ProductClass product = new ProductClass();
-			ProductTextClass prd = new ProductTextClass();
-			ProductClass prod;
-			List<ProductClass> productList = new ArrayList<>();
-			productList = prd.readFromFile();
-			if(productList == null){
-				System.out.println("\n Unable to get products \n");
-			}else
+			System.out.println("Your Receipt");
+			System.out.println("++++++++++++");
+			System.out.println("Item\tPrice\tQuantity\tSales_Tax\tTotal");
+			System.out.println("++++\t+++++\t++++++++\t+++++++++\t+++++");
+			for (Order o : orderList)
 			{
-				StringBuilder sb = new StringBuilder();
-				for(ProductClass p : productList)
-				{
-					prod = p;
-					sb.append(prod.getProductName());
-					sb.append(prod.getProductDescription());
-					sb.append(prod.getPrice());
-					sb.append("\n");
-				}
-				sb.toString();
 				
+				System.out.println(o.getpName() + "\t" +o.getPrice()+"\t"+ o.getQuantity() +"\t"
+								+"\t6%\t\t" + o.getGrandTotal());
 			}
+			System.out.println();
+			System.out.println("Billing Amount: "+ sum);
+			System.out.println();
+			System.out.println("Thank You...Have a Good Day!");
 		}
+		
 
 	
 
