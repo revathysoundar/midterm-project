@@ -1,4 +1,14 @@
 Code	Name	Description	Price
 ----	----	-----------	-----
-C001	Coffee	VanillaMocca	1.50
-C002	Tea	GreenTea	2.34
+C001	Coffee	Regular	2.00
+C002	Frappuccino	Carmel	3.50
+C003	Frappuccino	Mocha	3.50
+C004	Spritzer	Strawberry	3.25
+C005	Creme	Chai	2.75
+C006	Creme	Orange	2.75
+C007	Yogurt	Blueberry	3.25
+C008	Sandwich	Chicken	5.75
+C009	Panini	Turkey and Swiss	5.25
+C010	Salad	Cob	6.25
+C011	Donut	Glazed	1.25
+C012	Bagel	Plain	1.50
