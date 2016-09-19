@@ -14,7 +14,7 @@ public class ProductApp {
 		Scanner sc = new Scanner(System.in);
 		while(true){
 		int menuChoice = 0;
-		double qty, gTotal,sum=0;
+		double qty=0, gTotal,sum=0;
 		String total,selectMenu, price="",ch = "y";
 		List<Order> orderList = new ArrayList<>();
 		//ProductClass o = new Order();
@@ -27,19 +27,11 @@ public class ProductApp {
 			
 			o.displayAllProducts();
 			System.out.println("\nOrder by\n");
-			System.out.println("1.ProductCode");
-			System.out.println("2.ProductName");
+			System.out.println("1.Product Code");
+			System.out.println("2.Product Name");
 			System.out.println("\nEnter Option ");
-			try
-			{
-				menuChoice = sc.nextInt();
-			}catch(InputMismatchException ex)
-				{
-					System.out.println("Invalid Choice");
-					System.out.println("\nEnter Correct Option");
-					menuChoice = sc.nextInt();
-				}
 			try{
+				menuChoice = sc.nextInt();
 				if ( menuChoice != 1 && menuChoice != 2)
 				{
 					throw new IllegalArgumentException("Invalid Choice");
@@ -50,6 +42,7 @@ public class ProductApp {
 				System.out.println(ex.getMessage());
 				System.out.println("\nEnter Correct Option");
 				menuChoice = sc.nextInt();
+				
 			}
 				
 				System.out.println("\nEnter your Order here");
@@ -111,7 +104,7 @@ public class ProductApp {
 			payType = sc.nextInt();
 		}
 		
-		o.modeOfPayment(sc,payType,sum);
+		o.modeOfPayment(payType,sum);
 		printReceipt(orderList,o.formatTotal(sum));
 		
 		System.out.println();
@@ -128,7 +121,7 @@ public class ProductApp {
 			
 			System.out.println("Your Receipt");
 			System.out.println("++++++++++++");
-			System.out.println("Item\tPrice\tQuantity\tSales_Tax\tTotal");
+			System.out.println("\nItem\tPrice\tQuantity\tSales_Tax\tTotal");
 			System.out.println("~~~~\t~~~~~\t~~~~~~~~\t~~~~~~~~~~\t~~~~~");
 			for (Order o : orderList)
 			{
@@ -139,6 +132,7 @@ public class ProductApp {
 			
 			System.out.println("\nBilling Amount: "+ sum + "\n");
 		}
+		
 		
 
 	

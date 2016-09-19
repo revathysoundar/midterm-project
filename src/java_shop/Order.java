@@ -7,14 +7,17 @@ import java.util.Scanner;
 
 public class Order extends ProductClass{
 	
+	
+	
 	private static final double SALES_TAX = 0.06;
 	public String pName;
 	public String price;
-	public double quantity;
-	public double subTotal;
+	public double quantity = 1;
+	public double tax;
 	public double total;
 	public double grandTotal;
 	List<Order> order = new ArrayList<>();
+	Scanner sc = new Scanner(System.in);
 	
 	public Order()
 	{
@@ -103,8 +106,8 @@ public class Order extends ProductClass{
 		}
 		
 		total = dprice * quantity;
-		subTotal = total * SALES_TAX;
-		grandTotal = subTotal   + total;
+		tax = total * SALES_TAX;
+		grandTotal = tax   + total;
 		return formatTotal(grandTotal);
 	}
 	
@@ -115,7 +118,7 @@ public class Order extends ProductClass{
 		return billAmount;
 	}
 	
-	public void modeOfPayment(Scanner sc,int payType,double sum)
+	public String modeOfPayment(int payType,double sum)
 	{
 		switch(payType)
 		{
@@ -123,7 +126,8 @@ public class Order extends ProductClass{
 					double change = sc.nextDouble();
 					change = change - sum;
 					System.out.println("Change: "+formatTotal(change)+"\n");
-					break;
+					return formatTotal(change);
+					
 			
 				
 			case 2:	System.out.println("Enter the credit card details");
@@ -136,7 +140,7 @@ public class Order extends ProductClass{
 					String check = sc.next();
 					break;
 		}
-		
+		return null;
 	}
 	
 
