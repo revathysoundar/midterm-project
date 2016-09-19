@@ -1,7 +1,9 @@
 package java_shop;
 
 import java.util.ArrayList;
+//import java.util.HashSet;
 import java.util.List;
+//import java.util.Set;
 
 public class ProductClass {
 	
@@ -44,26 +46,30 @@ public class ProductClass {
 		this.price = price;
 	}
 
+	public List<ProductClass> getAll()
+	{
+		List<ProductClass> productList = new ArrayList<>();
+		ProductTextClass prd = new ProductTextClass();
+		productList = prd.readFromFile();
+		return productList;
+	}
 	public  void displayAllProducts()
 	{
-		ProductTextClass prd = new ProductTextClass();
-		List<ProductClass> productList = new ArrayList<>();
-		productList = prd.readFromFile();
+		List<ProductClass>productList = getAll();
 		if(productList == null){
 			System.out.println("\n Unable to get products from file \n");
 		}else
 		{
+			
 			for(ProductClass p : productList)
 			{
 				p.getProductCode();
 				p.getProductName();
 				p.getProductDescription();
 				p.getPrice();
-				System.out.println(p.getProductName() + "\t\t" + p.getProductDescription()
+				System.out.println(p.getProductCode() + "\t\t" + p.getProductName() + "\t\t" + p.getProductDescription()
 				+ "\t\t" + p.getPrice());
 			}
-			
-			
 		}
 	}
 }

@@ -23,7 +23,7 @@ import java.util.List;
 
 public class ProductTextClass {
 
-	private static  List<ProductClass> products = new ArrayList<>();
+	private List<ProductClass> products = new ArrayList<>();
 	private static final String FIELD_SEP = "\t";
 	private Path filePath = Paths.get("C:/Users/Administrator/workspace/midterm-project/src/java_shop/Product.txt");
 	
@@ -58,6 +58,7 @@ public class ProductTextClass {
 	{
 		try
 		{
+			checkForFile();
 			File file = filePath.toFile();
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -99,6 +100,7 @@ public class ProductTextClass {
 	{
 		try
 		{
+			checkForFile();
 			File file = filePath.toFile();
 			FileWriter fstream = new FileWriter(file,true);
             BufferedWriter fbw = new BufferedWriter(fstream);

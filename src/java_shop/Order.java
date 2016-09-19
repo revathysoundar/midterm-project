@@ -3,8 +3,9 @@ package java_shop;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-public class Order {
+public class Order extends ProductClass{
 	
 	private static final double SALES_TAX = 0.06;
 	public String pName;
@@ -59,11 +60,9 @@ public class Order {
 		this.grandTotal = grandTotal;
 	}
 
-	public String searchOrderByName(String oName )
+	public String searchOrderByName(String oName )  throws  NullPointerException
 	{
-		List<ProductClass> productList = new ArrayList<>();
-		ProductTextClass prd = new ProductTextClass();
-		productList = prd.readFromFile();
+		List<ProductClass>productList = getAll();
 		for (ProductClass p : productList){
 			if(p.getProductName().equals(oName))
 				return p.getPrice();
@@ -71,11 +70,9 @@ public class Order {
 		return null;
 	}
 	
-	public String searchOrderByNumber(String oCode )
+	public String searchOrderByNumber(String oCode ) throws  NullPointerException
 	{
-		List<ProductClass> productList = new ArrayList<>();
-		ProductTextClass prd = new ProductTextClass();
-		productList = prd.readFromFile();
+		List<ProductClass>productList = getAll();
 		for (ProductClass p : productList){
 			if(p.getProductCode().equals(oCode))
 				return p.getPrice();
@@ -83,11 +80,9 @@ public class Order {
 		return null;
 	}
 	
-	public String searchForProduct(String oCode )
+	public String searchForProduct(String oCode ) throws  NullPointerException
 	{
-		List<ProductClass> productList = new ArrayList<>();
-		ProductTextClass prd = new ProductTextClass();
-		productList = prd.readFromFile();
+		List<ProductClass>productList = getAll();
 		for (ProductClass p : productList){
 			if(p.getProductCode().equals(oCode))
 				return p.getProductName();
@@ -96,9 +91,17 @@ public class Order {
 	}
 	
 	
-	public String calculateTotal(String price)
+	public String calculateTotal(String price) throws  NullPointerException
 	{
-		double dprice = Double.parseDouble(price);
+		double dprice = 0.0;
+		try
+		{
+			 dprice = Double.parseDouble(price);
+		}catch(NumberFormatException ex)
+		{
+			System.out.println(ex.getMessage());
+		}
+		
 		total = dprice * quantity;
 		subTotal = total * SALES_TAX;
 		grandTotal = subTotal   + total;
@@ -112,11 +115,27 @@ public class Order {
 		return billAmount;
 	}
 	
-	public void modeOfPayment(int payType)
+	public void modeOfPayment(Scanner sc,int payType,double sum)
 	{
-		
-		
-		//use switch case for cash, credit, cheque and do the corresponding actions as per the document
+		switch(payType)
+		{
+			case 1:	System.out.println("Enter the dollars");
+					double change = sc.nextDouble();
+					change = change - sum;
+					System.out.println("Change: "+formatTotal(change)+"\n");
+					break;
+			
+				
+			case 2:	System.out.println("Enter the credit card details");
+					long cardNumber = sc.nextInt();
+					int cvv = sc.nextInt();
+					break;
+			
+				
+			case 3:	System.out.println("Enter the check number...");
+					String check = sc.next();
+					break;
+		}
 		
 	}
 	
