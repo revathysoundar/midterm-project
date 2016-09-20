@@ -1,9 +1,13 @@
 package java_shop;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+
+import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
 
 public class Order extends ProductClass{
 	
@@ -18,6 +22,7 @@ public class Order extends ProductClass{
 	public double grandTotal;
 	List<Order> order = new ArrayList<>();
 	Scanner sc = new Scanner(System.in);
+	String pNotFound = "Product Not Found";
 	
 	public Order()
 	{
@@ -70,7 +75,17 @@ public class Order extends ProductClass{
 			if(p.getProductName().equals(oName))
 				return p.getPrice();
 		}
-		return null;
+		return pNotFound;
+	}
+	
+	public String searchForProductName(String oName )  throws  NullPointerException
+	{
+		List<ProductClass>productList = getAll();
+		for (ProductClass p : productList){
+			if(p.getProductName().equals(oName))
+				return p.getProductName();
+		}
+		return pNotFound;
 	}
 	
 	public String searchOrderByNumber(String oCode ) throws  NullPointerException
@@ -80,7 +95,7 @@ public class Order extends ProductClass{
 			if(p.getProductCode().equals(oCode))
 				return p.getPrice();
 		}
-		return null;
+		return pNotFound;
 	}
 	
 	public String searchForProduct(String oCode ) throws  NullPointerException
@@ -90,7 +105,7 @@ public class Order extends ProductClass{
 			if(p.getProductCode().equals(oCode))
 				return p.getProductName();
 		}
-		return null;
+		return pNotFound;
 	}
 	
 	
@@ -118,12 +133,17 @@ public class Order extends ProductClass{
 		return billAmount;
 	}
 	
-	public String modeOfPayment(int payType,double sum)
+	public String modeOfPayment(int payType,double sum) 
 	{
 		switch(payType)
 		{
 			case 1:	System.out.println("Enter the dollars");
 					double change = sc.nextDouble();
+					if(change < sum)
+					{
+						System.out.println("Insufficient Dollars... Please enter again");
+						change = sc.nextDouble();
+					}
 					change = change - sum;
 					System.out.println("Change: "+formatTotal(change)+"\n");
 					return formatTotal(change);
@@ -133,6 +153,7 @@ public class Order extends ProductClass{
 			case 2:	System.out.println("Enter the credit card details");
 					long cardNumber = sc.nextInt();
 					int cvv = sc.nextInt();
+					
 					break;
 			
 				
