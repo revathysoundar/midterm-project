@@ -26,7 +26,7 @@ public class Validator
             }
             else
             {
-                System.out.println("Error! Invalid integer value. Try again.");
+                System.out.println("Invalid value. Try again.");
             }
             sc.nextLine();  // discard any other data entered on the line
         }
@@ -43,10 +43,10 @@ public class Validator
             i = getInt(sc, prompt);
             if (i < min)
                 System.out.println(
-                    "Error! Number must be 1 or 2");
+                    "Number must be 1 or 2");
             else if (i > max)
                 System.out.println(
-                    "Error! Number must be 1 or 2");
+                    "Number must be 1 or 2");
             else
                 isValid = true;
         }

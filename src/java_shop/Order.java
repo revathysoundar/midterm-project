@@ -133,36 +133,6 @@ public class Order extends ProductClass{
 		return billAmount;
 	}
 	
-	public String modeOfPayment(int payType,double sum) 
-	{
-		switch(payType)
-		{
-			case 1:	System.out.println("Enter the dollars");
-					double change = sc.nextDouble();
-					if(change < sum)
-					{
-						System.out.println("Insufficient Dollars... Please enter again");
-						change = sc.nextDouble();
-					}
-					change = change - sum;
-					System.out.println("Change: "+formatTotal(change)+"\n");
-					return formatTotal(change);
-					
-			
-				
-			case 2:	System.out.println("Enter the credit card details");
-					long cardNumber = sc.nextInt();
-					int cvv = sc.nextInt();
-					
-					break;
-			
-				
-			case 3:	System.out.println("Enter the check number...");
-					String check = sc.next();
-					break;
-		}
-		return null;
-	}
-	
+
 
 }

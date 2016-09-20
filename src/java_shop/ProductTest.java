@@ -6,11 +6,10 @@ import org.junit.Test;
 public class ProductTest {
 	
 	@Test
-	public void whenChange10Expect_5_76()
+	public void whengrandTotal2_12()
 	{
 		Order o = new Order();
-		String change = o.modeOfPayment(1, 4.24);
-		Assert.assertEquals("$5.76", change);
+		Assert.assertEquals("$2.12",o.calculateTotal("2.00"));
 	}
 	
 	@Test
@@ -45,5 +44,31 @@ public class ProductTest {
 		Assert.assertEquals("$2.34", total);
 	}
 	
+	@Test
+	public void whenProductCodeC002_ExpectFrapp()
+	{
+		Order o = new Order();
+		String pName = o.searchForProduct("C002");
+		Assert.assertEquals("Frapp", pName);
+	}
 
+	@Test
+	public void whenProductNameMilk_ExpectMilk()
+	{
+		Order o = new Order();
+		String price = o.searchOrderByName("Milk");
+		Assert.assertEquals("3.25", price);
+		
+	}
+	
+	@Test
+	public void whenformatTotal$3_7100()
+	{
+		Order o = new Order();
+		String total = o.formatTotal(3.7100);
+		Assert.assertEquals("$3.71", total);
+	}
+	
+		
 }
+

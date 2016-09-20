@@ -1,10 +1,11 @@
 package java_shop;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-/**The ProductApp displays menu information for the user and retrieves request from the user 
+
+/**
+ * The ProductApp displays menu information for the user and retrieves request from the user 
 */
 public class ProductApp {
 
@@ -20,6 +21,7 @@ public class ProductApp {
 		String pFound = "Product Not Found";
 		//ProductClass o = new Order();
 		Order o = new Order();
+		Payment p = new Payment();
 		System.out.println("Welcome to Java Shop!");
 		System.out.println("*********************");
 		System.out.println();
@@ -45,11 +47,9 @@ public class ProductApp {
 									continue;
 								}
 								else
-										break;
+									break;
 							}	 
-						
-						
-						try
+							try
 							{
 							 price = o.searchOrderByNumber(selectMenu);
 							 selectMenu = o.searchForProduct(selectMenu);
@@ -70,7 +70,7 @@ public class ProductApp {
 									continue;
 								}
 								else
-										break;
+									break;
 							}	 
 						
 							try
@@ -116,8 +116,8 @@ public class ProductApp {
 			payType = sc.nextInt();
 		}
 		
-		o.modeOfPayment(payType,sum);
-		printReceipt(orderList,o.formatTotal(sum));
+		p.modeOfPayment(payType,sum);
+		printReceipt(orderList,o.formatTotal(sum),payType);
 		
 		System.out.println();
 		System.out.println("Thank You...Have a Good Day!\n");
@@ -129,7 +129,7 @@ public class ProductApp {
 		
 	/**This method displays and prints the user receipt
 		*/
-		public static void printReceipt(List<Order> orderList,String sum)
+		public static void printReceipt(List<Order> orderList,String sum,int payType)
 		{
 			
 			System.out.println("Your Receipt");
@@ -144,6 +144,16 @@ public class ProductApp {
 			}
 			
 			System.out.println("\nBilling Amount: "+ sum + "\n");
+			switch(payType)
+			{
+			case 1: System.out.println("You paid by cash");
+					break;
+			case 2: System.out.println("You paid by credit");
+					break;
+			case 3: System.out.println("You paid by check");
+					break;
+				}
+			
 		}
 		
 		
