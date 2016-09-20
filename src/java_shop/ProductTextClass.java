@@ -26,7 +26,7 @@ public class ProductTextClass {
 
 	private List<ProductClass> products = new ArrayList<>();
 	private static final String FIELD_SEP = "\t";
-	private Path filePath = Paths.get("C:/Users/Administrator/workspace/midterm-project/src/java_shop/Product.txt");
+	private Path filePath = Paths.get("src/java_shop/Product.txt");
 	
 	/**
 	 *  Checks for the file in the specified path, if not found creates a new file 
@@ -39,7 +39,7 @@ public class ProductTextClass {
 			return;
 		}
 		
-		File file = new File("C:/Users/Administrator/workspace/midterm-project/src/java_shop/Product.txt");
+		File file = new File("src/java_shop/Product.txt");
 		try
 		{
 			file.createNewFile();

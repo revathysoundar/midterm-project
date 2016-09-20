@@ -6,7 +6,9 @@ import java.util.List;
 //import java.util.Set;
 
 public class ProductClass {
-	
+	/**This product class sets and retrieves product information
+	 */
+	 
 	public String productCode;
 	public String productName;
 	public String productDescription;

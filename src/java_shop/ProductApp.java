@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-
-
-
+/**The ProductApp displays menu information for the user and retrieves request from the user 
+*/
 public class ProductApp {
 
 	public static void main(String[] args) {
@@ -128,8 +127,8 @@ public class ProductApp {
 		
 	}
 		
-		
-		
+	/**This method displays and prints the user receipt
+		*/
 		public static void printReceipt(List<Order> orderList,String sum)
 		{
 			
